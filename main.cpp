@@ -1,47 +1,39 @@
 #include <stdio.h>
-template<typename T>
-void Min(T a, T b) {
-	if (a < b) {
-		printf("%d\n", static_cast<T> (a));
-	}
-	else
-	{
-		printf("%d\n", static_cast<T> (b));
-	}
-}
 
-template<>
-void Min<float>(float a, float b) {
-	if (a < b) {
-		printf("%f\n", a);
-	}
-	else
-	{
-		printf("%f\n", b);
-	}
-}
+template<typename T, typename T2>
 
-template<>
-void Min<double>(double a, double b) {
-	if (a < b) {
-		printf("%lf\n", a);
-	}
-	else
-	{
-		printf("%lf\n", b);
-	}
-}
+class Number{
+public:
 
-int main() {
-	int intA = 2;
-	int intB = 3;
-	float floatC = 6;
-	float floatD = 28;
-	double doubleE = 3.14;
-	double doubleF = 3.16;
-	Min<int>(intA, intB);
-	Min<float>(floatC, floatD);
-	Min<double>(doubleE, doubleF);
+	T number;
+	T number2;
+
+	Number(T number, T number2) : number(number), number2(number2) {}
+
+	T Min(T a, T b){
+		if (a < b){
+			return static_cast<T>(a);
+		}else{
+			return static_cast<T>(b);
+		}
+	}
+};
+
+int main(){
+	Number<int, int> b1(3, 1);
+	Number<float, float> b2(4, 1);
+	Number<double, double> b3(5, 9);
+	Number<int, float> b4(2, 6);
+	Number<float, double> b5(5, 3);
+	Number<double, int> b6(5, 8);
+
+	printf("int,int : %d\n", b1.Min(1, 2));
+	printf("float,float : %f\n", b2.Min(2.0, 3.0));
+	printf("double,double : %lf\n", b3.Min(6.0, 28.0));
+
+	printf("int, float : %d\n", b4.Min(3, 5.0));
+	printf("float, double : %f\n", b5.Min(7.0, 50.0));
+	printf("double, int : %lf\n", b6.Min(72.0, 4));
 
 	return 0;
 }
